@@ -1,0 +1,36 @@
+########################################
+#
+#   Suzette Flantua 
+#   Oct 2018
+#
+########################################
+
+# Aim:
+# Graph UFL
+
+
+# Clear objects and environment
+ls()
+remove(list = ls())
+
+# Load packages
+library(tidyverse)
+library(readxl)
+library(raster)
+library(lubridate)
+library(stargazer)
+
+#### import UFL vs time file (Funza)
+ufl_perc<-read_csv("UFL_PERC.csv", col_names = TRUE,col_types = TRUE, quote = "\"") 
+head(ufl_perc)
+
+str(ufl_perc)
+
+pl1_UFL_vs_perc <- ggplot(ufl_perc, aes(x = ELEV, y = PERC_TIME)) +
+  geom_bar(stat = "identity") +
+  coord_flip()
+pl1_UFL_vs_perc
+
+EC_cord_dur_stats <- ufl_perc %>%
+    summarise(
+    mean_perc = mean(PERC))
